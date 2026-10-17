@@ -1,0 +1,33 @@
+{
+  "chairman": "gpt",
+  "timeout": 120,
+  "max_tokens": 4096,
+  "members": [
+    {
+      "name": "gpt",
+      "base_url": "https://api.openai.com/v1/",
+      "model": "gpt-4o-mini",
+      "api_key_env": "OPENAI_API_KEY"
+    },
+    {
+      "name": "claude",
+      "base_url": "https://api.anthropic.com/v1/",
+      "model": "claude-sonnet-4-5",
+      "api_key_env": "ANTHROPIC_API_KEY"
+    },
+    {
+      "name": "local",
+      "base_url": "http://127.0.0.1:11434/v1",
+      "model": "llama3.2"
+    }
+  ],
+  "_notes": {
+    "members[].base_url": "API root; the script POSTs to <base_url>/chat/completions (must be OpenAI-compatible).",
+    "members[].api_key_env": "Name of the environment variable holding the API key. Omit for keyless servers such as Ollama. Keys are never read from files.",
+    "chairman": "Member name that writes the final answer. If it is unreachable, the top-scoring surviving member takes over.",
+    "language": "Optional, e.g. 'Traditional Chinese'. Default: reply in the language of the question.",
+    "timeout": "Seconds per HTTP request.",
+    "max_tokens": "Per-request completion budget.",
+    "api_key": "Not supported on purpose - set OPENAI_API_KEY etc. in your environment instead."
+  }
+}
