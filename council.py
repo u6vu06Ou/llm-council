@@ -20,7 +20,7 @@ Usage
     python council.py                       # interactive prompt
     python council.py -v "question"         # show every member's raw answer
     python council.py --chairman NAME "q"   # pick the chair member
-    python council.py --review HEAD "q"     # code-review mode: all members review a git diff
+    python council.py --review --git HEAD "q"  # code-review mode: all members review a git diff
     python council.py --do CMD "question"   # run CMD afterwards, plan piped to stdin
     python council.py --config other.json "question"
 

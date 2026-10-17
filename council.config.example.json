@@ -11,9 +11,9 @@
     },
     {
       "name": "claude",
-      "base_url": "https://api.anthropic.com/v1/",
+      "base_url": "http://127.0.0.1:4000/v1",
       "model": "claude-sonnet-4-5",
-      "api_key_env": "ANTHROPIC_API_KEY"
+      "api_key_env": "LITELLM_API_KEY"
     },
     {
       "name": "local",
@@ -22,6 +22,7 @@
     }
   ],
   "_notes": {
+    "claude member": "Anthropic's official API (api.anthropic.com) speaks the Anthropic format (/v1/messages) and has no /chat/completions endpoint, so base_url cannot point at it directly. Put Claude behind an OpenAI-compatible gateway (here: a LiteLLM proxy on its default port 4000) and point base_url at that gateway.",
     "members[].base_url": "API root; the script POSTs to <base_url>/chat/completions (must be OpenAI-compatible).",
     "members[].api_key_env": "Name of the environment variable holding the API key. Omit for keyless servers such as Ollama. Keys are never read from files.",
     "chairman": "Member name that writes the final answer. If it is unreachable, the top-scoring surviving member takes over.",

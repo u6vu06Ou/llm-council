@@ -31,7 +31,7 @@ python council.py -v "same question"
 | field | meaning |
 |---|---|
 | `members[].name` | display name, also used by `--chairman` |
-| `members[].base_url` | API root, e.g. `https://api.openai.com/v1`; the script POSTs to `<base_url>/chat/completions` |
+| `members[].base_url` | API root, e.g. `https://api.openai.com/v1`; the script POSTs to `<base_url>/chat/completions` (the official Anthropic API is Anthropic-format `/v1/messages`, not this shape — put Claude behind an OpenAI-compatible gateway, see the example config) |
 | `members[].model` | model id sent to the backend |
 | `members[].api_key_env` | env var holding the key; omit for keyless servers (e.g. Ollama) |
 | `chairman` | member that writes the final answer; falls back to the top survivor |
@@ -42,11 +42,11 @@ python council.py -v "same question"
 ## Modes
 
 ```bash
-python council.py "question"             # standard council
-python council.py -v "question"          # also print every member's raw answer
+python council.py "question"                           # standard council
+python council.py -v "question"                        # also print every member's raw answer
 python council.py --chairman local "question"
-python council.py --review HEAD          # every member reviews a git diff, the chair merges one review
-python council.py --review "--staged"
+python council.py --review --git HEAD                  # every member reviews a git diff, the chair merges one review
+python council.py --review --git=--staged              # review the staged changes instead
 python council.py --do "pytest -x" "how do we fix the flaky test?"  # run CMD afterwards, plan on stdin (+ $COUNCIL_PLAN)
 ```
 
@@ -78,5 +78,5 @@ MIT — see [LICENSE](LICENSE).
 ```bash
 cp council.config.example.json council.config.json   # 填好 base_url / model / api_key_env
 python council.py "你的問題"
-python council.py --review HEAD   # 多模型 code review，主席彙整成一份
+python council.py --review --git HEAD   # 多模型 code review，主席彙整成一份
 ```
